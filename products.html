@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Products - Rhythm's Palette</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Playfair Display", serif;
+        }
+
+        body {
+            background: #fff;
+            color: #222;
+        }
+
+        header {
+  background: #fff;
+  padding: 1rem 15vw;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #eaeaea;
+  font-size: 1.2rem;
+}
+
+.logo img {
+  height: 120px;
+}
+
+nav {
+  display: flex;
+  gap: 3rem;
+  margin-top: 0.5rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: #888;
+  font-weight: 500;
+  position: relative;
+  padding-top: 10px;
+  transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+  color: #111;
+}
+
+nav a:hover::after,
+nav a.active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #111;
+  transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  header {
+    padding: 1rem 5vw;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1rem;
+  }
+}
+
+        .container {
+            display: flex;
+            padding: 2rem 10vw;
+            flex-wrap: wrap;
+        }
+
+        .sidebar {
+            flex: 1 1 220px;
+            max-width: 220px;
+            padding-right: 2rem;
+        }
+
+        .sidebar h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.5rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .sidebar ul li a {
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+            padding: 0.3rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar ul li a.active-filter {
+            font-weight: bold;
+            color: #111;
+            border-left: 3px solid #111;
+            padding-left: 0.5rem;
+        }
+
+        .sidebar label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        #price-range {
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        .products-area {
+            flex: 3 1 900px;
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .products-header h2 {
+            font-size: 2rem;
+        }
+
+        .sort select {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            padding: 1rem;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .product-price {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content-large {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 1200px;
+            width: 95%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .modal-grid {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+        }
+
+        .modal-image img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+
+        .modal-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-price {
+            font-size: 1.4rem;
+            color: #333;
+            margin: 0.5rem 0;
+        }
+
+        .modal-description {
+            margin: 1rem 0;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .buy-button {
+            padding: 0.8rem 1.5rem;
+            background: #111;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: auto;
+            width: fit-content;
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+            background: #fafafa;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.avif" alt="Rhythm's Palette Logo" />
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#gallery" class="active">Products</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Collections</h3>
+            <ul>
+                <li><a href="#" class="active-filter" onclick="filterCollection('all')">All Products</a></li>
+                <li><a href="#" onclick="filterCollection('Zen')">Zen Collection</a></li>
+                <li><a href="#" onclick="filterCollection('Animalia')">Animalia Collection</a></li>
+                <li><a href="#" onclick="filterCollection('Bubbles')">Bubbles Collection</a></li>
+                <li><a href="#" onclick="filterCollection('Lonelies')">Lonelies Collection</a></li>
+            </ul>
+            <h3>Price</h3>
+            <label for="price-range">Max Price: $<span id="price-value">320</span></label>
+            <input type="range" id="price-range" min="0" max="320" value="320" step="5"
+                oninput="updatePriceFilter(this.value)" />
+        </aside>
+        <script>
+            function updatePriceFilter(maxPrice) {
+                document.getElementById('price-value').textContent = maxPrice;
+                const allCards = document.querySelectorAll('.product-card');
+                const activeCollection = document.querySelector('.sidebar a.active-filter')?.textContent;
+                const collection = activeCollection?.includes('All') ? 'all' : activeCollection?.replace(' Collection', '');
+
+                allCards.forEach(card => {
+                    const price = parseFloat(card.dataset.price);
+                    const matchCollection = collection === 'all' || card.dataset.collection === collection;
+                    const matchPrice = price <= parseFloat(maxPrice);
+                    card.style.display = matchCollection && matchPrice ? 'block' : 'none';
+                });
+            }
+
+        </script>
+
+        <section class="products-area">
+            <div class="products-header">
+                <h2>All Products</h2>
+                <div class="sort">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select" onchange="sortProducts()">
+                        <option value="low">Price: Low to High</option>
+                        <option value="high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="product-grid" id="product-grid">
+                <div class="product-card" data-collection="Zen" data-price="320.0"
+                    onclick="showProductDetails('Adam\'s Eve', 320.0, 'adams-eve.avif', `A surreal interpretation of organic patterns and blooming life.`)">
+                    <img src="adams-eve.avif" alt="Adam's Eve" />
+                    <div class="product-title">Adam's Eve</div>
+                    <div class="product-price">$320</div>
+                </div>
+
+                <div class="product-card" data-collection="Lonelies" data-price="165.0"
+                    onclick="showProductDetails('Eternal Tides', 165.0, 'eternal-tides.avif', `Endless waves of emotion captured in a static moment.`)">
+                    <img src="eternal-tides.avif" alt="Eternal Tides" />
+                    <div class="product-title">Eternal Tides</div>
+                    <div class="product-price">$165</div>
+                </div>
+
+                <div class="product-card" data-collection="Lonelies" data-price="95.0"
+                    onclick="showProductDetails('Mini Garden', 95.0, 'mini-garden.avif', `A quiet escape into the joy of tiny growing things.`)">
+                    <img src="mini-garden.avif" alt="Mini Garden" />
+                    <div class="product-title">Mini Garden</div>
+                    <div class="product-price">$95</div>
+                </div>
+
+                <div class="product-card" data-collection="Lonelies" data-price="105.0"
+                    onclick="showProductDetails('Creator\'s Touch', 105.0, 'creators-touch.avif', `A spark of divinity as nature meets geometry.`)">
+                    <img src="creators-touch.avif" alt="Creator's Touch" />
+                    <div class="product-title">Creator's Touch</div>
+                    <div class="product-price">$105</div>
+                </div>
+
+                <div class="product-card" data-collection="Bubbles" data-price="75.0"
+                    onclick="showProductDetails('Feathers In Color', 75.0, 'feathers-in-color.avif', `Delicate feathers bloom into a spectrum of joy.`)">
+                    <img src="feathers-in-color.avif" alt="Feathers In Color" />
+                    <div class="product-title">Feathers In Color</div>
+                    <div class="product-price">$75</div>
+                </div>
+
+                <div class="product-card" data-collection="Zen" data-price="125.0"
+                    onclick="showProductDetails('Grove', 125.0, 'grove.avif', `A peaceful forest moment where silence speaks volumes.`)">
+                    <img src="grove.avif" alt="Grove" />
+                    <div class="product-title">Grove</div>
+                    <div class="product-price">$125</div>
+                </div>
+
+                <div class="product-card" data-collection="Lonelies" data-price="85.0"
+                    onclick="showProductDetails('TwoFaced', 85.0, 'twofaced.avif', `Duality of emotion rendered through minimalist line.`)">
+                    <img src="twofaced.avif" alt="TwoFaced" />
+                    <div class="product-title">TwoFaced</div>
+                    <div class="product-price">$85</div>
+                </div>
+
+                <div class="product-card" data-collection="Lonelies" data-price="115.0"
+                    onclick="showProductDetails('The Pineapple', 115.0, 'the-pineapple.avif', `Symbol of hospitality turned into visual delight.`)">
+                    <img src="the-pineapple.avif" alt="The Pineapple" />
+                    <div class="product-title">The Pineapple</div>
+                    <div class="product-price">$115</div>
+                </div>
+
+                <div class="product-card" data-collection="Animalia" data-price="95.0"
+                    onclick="showProductDetails('Shell Mono', 95.0, 'shell-mono.avif', `Textures of the sea in black and white elegance.`)">
+                    <img src="shell-mono.avif" alt="Shell Mono" />
+                    <div class="product-title">Shell Mono</div>
+                    <div class="product-price">$95</div>
+                </div>
+
+                <div class="product-card" data-collection="Animalia" data-price="160.0"
+                    onclick="showProductDetails('Ascending Canopy', 160.0, 'ascending-canopy.avif', `The view from below as trees reach for sky.`)">
+                    <img src="ascending-canopy.avif" alt="Ascending Canopy" />
+                    <div class="product-title">Ascending Canopy</div>
+                    <div class="product-price">$160</div>
+                </div>
+
+                <div class="product-card" data-collection="Animalia" data-price="160.0"
+                    onclick="showProductDetails('Right Eye', 160.0, 'right-eye.avif', `The gaze of wildlife expressed in abstract motion.`)">
+                    <img src="right-eye.avif" alt="Right Eye" />
+                    <div class="product-title">Right Eye</div>
+                    <div class="product-price">$160</div>
+                </div>
+
+                <div class="product-card" data-collection="Bubbles" data-price="150.0"
+                    onclick="showProductDetails('The Colorful Smirk', 150.0, 'the-colorful-smirk.avif', `A cheeky twist in swirling hues.`)">
+                    <img src="the-colorful-smirk.avif" alt="The Colorful Smirk" />
+                    <div class="product-title">The Colorful Smirk</div>
+                    <div class="product-price">$150</div>
+                </div>
+
+                <div class="product-card" data-collection="Bubbles" data-price="150.0"
+                    onclick="showProductDetails('Shy Pink', 150.0, 'shell-mono.avif', `Gentle warmth wrapped in quiet tones.`)">
+                    <img src="shell-mono.avif" alt="Shy Pink" />
+                    <div class="product-title">Shy Pink</div>
+                    <div class="product-price">$150</div>
+                </div>
+
+                <div class="product-card" data-collection="Bubbles" data-price="160.0"
+                    onclick="showProductDetails('The Castle In A Cloud', 160.0, 'the-castle-in-a-coud.avif', `Whimsical dreams floating just beyond reach.`)">
+                    <img src="the-castle-in-a-coud.avif" alt="The Castle In A Cloud" />
+                    <div class="product-title">The Castle In A Cloud</div>
+                    <div class="product-price">$160</div>
+                </div>
+
+                <div class="product-card" data-collection="Zen" data-price="150.0"
+                    onclick="showProductDetails('Abstraction Hypnosis', 150.0, 'abstraction-hypnosis.avif', `Where abstraction becomes a meditative rhythm.`)">
+                    <img src="abstraction-hypnosis.avif" alt="Abstraction Hypnosis" />
+                    <div class="product-title">Abstraction Hypnosis</div>
+                    <div class="product-price">$150</div>
+                </div>
+
+                <div class="product-card" data-collection="Zen" data-price="175.0"
+                    onclick="showProductDetails('Cracks in Celeste', 175.0, 'cracks-in-celeste.avif', `Light breaking through celestial cracks.`)">
+                    <img src="cracks-in-celeste.avif" alt="Cracks in Celeste" />
+                    <div class="product-title">Cracks in Celeste</div>
+                    <div class="product-price">$175</div>
+                </div>
+
+                <div class="product-card" data-collection="Zen" data-price="170.0"
+                    onclick="showProductDetails('Harmony of Pisces', 170.0, 'harmony-of-pisces.avif', `Balance and beauty in aquatic duality.`)">
+                    <img src="harmony-of-pisces.avif" alt="Harmony of Pisces" />
+                    <div class="product-title">Harmony of Pisces</div>
+                    <div class="product-price">$170</div>
+                </div>
+
+            </div>
+        </section>
+        <footer>
+            &copy; 2025 Rhythm Chauhan. Designed with vision and heart.
+        </footer>
+
+        <script>
+            function filterCollection(collection) {
+                const allCards = document.querySelectorAll('.product-card');
+                document.querySelectorAll('.sidebar a').forEach(link => link.classList.remove('active-filter'));
+                const target = [...document.querySelectorAll('.sidebar a')].find(a => a.textContent.includes(collection === 'all' ? 'All' : collection));
+                if (target) target.classList.add('active-filter');
+
+                allCards.forEach(card => {
+                    if (collection === 'all' || card.dataset.collection === collection) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            function sortProducts() {
+                const grid = document.getElementById('product-grid');
+                const cards = Array.from(grid.children);
+                const sortValue = document.getElementById('sort-select').value;
+
+                cards.sort((a, b) => {
+                    const priceA = parseFloat(a.dataset.price);
+                    const priceB = parseFloat(b.dataset.price);
+                    return sortValue === 'low' ? priceA - priceB : priceB - priceA;
+                });
+
+                cards.forEach(card => grid.appendChild(card));
+            }
+        </script>
+
+        <div id="product-modal" class="modal">
+            <div class="modal-content-large">
+                <button id="modal-close"
+                    style="position: absolute; top: 20px; right: 20px; font-size: 2rem; background: none; border: none; cursor: pointer;"
+                    onclick="closeModal()">×</button>
+
+                <div class="modal-grid">
+                    <div class="modal-image">
+                        <img id="modal-image" src="" alt="" />
+                    </div>
+                    <div class="modal-details">
+                        <h2 id="modal-title"></h2>
+                        <p id="modal-price" class="modal-price"></p>
+                        <p id="modal-description" class="modal-description"></p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+
+        </style>
+
+        <script>
+            function showProductDetails(title, price, imageSrc, description) {
+                document.getElementById('modal-title').textContent = title;
+                document.getElementById('modal-price').textContent = `$${price}`;
+                document.getElementById('modal-image').src = imageSrc;
+                document.getElementById('modal-image').alt = title;
+                document.getElementById('modal-description').innerHTML = description;
+                document.getElementById('product-modal').style.display = 'flex';
+            }
+
+
+            function closeModal() {
+                document.getElementById('product-modal').style.display = 'none';
+            }
+        </script>
+</body>
+
+</html>

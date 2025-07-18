@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Two Column Art Layout with SVG</title>
+  <style>
+    body {
+      margin: 60px;
+      font-family: Georgia, serif;
+      background-color: white;
+    }
+
+    .layout {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      flex: 1;
+    }
+
+    .left-column {
+      margin-left: 60px;
+    }
+
+    .right-column {
+      margin-right: 60px;
+    }
+
+    .box {
+      border: 1px solid black;
+      padding: 20px;
+      text-align: center;
+      background-color: white;
+      position: relative;
+    }
+
+    .box img {
+      width: 70%;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px auto; /* Centers image and adds bottom padding */
+    }
+
+    .label {
+      font-size: 14px;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .shop-link {
+      font-size: 12px;
+      text-decoration: underline;
+      display: block;
+      margin-top: 5px;
+      color: black;
+    }
+
+    .blue { background-color: #d7edf1; }
+    .green { background-color: #e0e7d9; }
+    .peach { background-color: #f3e1d4; }
+
+    .intro {
+      padding: 15px;
+      text-align: left;
+    }
+
+    .intro h1 {
+      font-size: 24px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pineapple-label {
+      font-size: 12px;
+      font-weight: normal;
+    }
+
+    .svg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+    <!-- LEFT COLUMN -->
+    <div class="column left-column">
+      <!-- Intro Text -->
+      <div class="box intro">
+        <h1>ORIGINAL<br>HAND-MADE<br>DESIGNS</h1>
+        <p>
+          Rhythm Chauhan is a visual artist based in Kamloops, British Columbia, Canada. She works with digital media to mindfully make art for clients all over the world. She uses the world around her to create pieces that balance emotion, expression, and flow. For more, find your rhythm, at Rhythm’s Palette.
+        </p>
+      </div>
+
+      <!-- Bubbles Collection -->
+      <div class="box blue">
+        <img src="sketch1.avif" alt="Framed Sketch">
+        <div class="label">BUBBLES COLLECTION</div>
+        <a class="shop-link" href="#">Shop Now</a>
+      </div>
+
+      <!-- The Lonelies -->
+      <div class="box">
+        <img src="sketch1.avif" alt="Framed Sketch">
+        <div class="label">THE LONELIES<br><span class="pineapple-label">The Pineapple</span></div>
+        <a class="shop-link" href="#">Shop Now</a>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="column right-column">
+      <!-- Top Right Image with SVG Overlay -->
+      <div class="box">
+        <img src="sketch1.avif" alt="Framed Sketch">
+        
+      </div>
+
+      <!-- Zen Collection -->
+      <div class="box green">
+        <img src="sketch1.avif" alt="Framed Sketch">
+        <div class="label">ZEN COLLECTION</div>
+        <a class="shop-link" href="#">Shop Now</a>
+      </div>
+
+      <!-- Animals Collection -->
+      <div class="box peach">
+        <img src="sketch1.avif" alt="Framed Sketch">
+        <div class="label">ANIMAL COLLECTION</div>
+        <a class="shop-link" href="#">Shop Now</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
