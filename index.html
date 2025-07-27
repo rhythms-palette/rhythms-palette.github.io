@@ -1,439 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rhythm's Palette</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Ruda:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link
-      href="https://db.onlinewebfonts.com/c/f8deb3c1a029ec56b15bb462c1518f07?family=Snell+Roundhand+W01+Script"
-      rel="stylesheet"
-    />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Playfair Display", serif;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rhythm's Palette</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ruda:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link href="https://db.onlinewebfonts.com/c/f8deb3c1a029ec56b15bb462c1518f07?family=Snell+Roundhand+W01+Script" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="headerStyle.css">
+</head>
+<body>
 
-      body {
-        background: #ffffff;
-        color: #222;
-        overflow-x: hidden;
-      }
-      header {
-        background: #fff;
-        padding: 1rem 15vw;
-        margin-top: 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        border-bottom: 1px solid #eaeaea;
-        font-size: 1.2rem;
-      }
-      nav {
-        display: flex;
-        gap: 3rem;
-        margin-top: 0.5rem;
-      }
-      .logo img {
-        height: 120px;
-      }
-      nav a {
-        text-decoration: none;
-        color: #888;
-        font-weight: 500;
-        position: relative;
-        padding-top: 10px;
-        transition: color 0.3s ease;
-      }
-      nav a:hover,
-      nav a.active {
-        color: #111;
-      }
-      nav a:hover::after,
-      nav a.active::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background-color: #111;
-        transition: all 0.3s ease;
-      }
-      .hero {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        background-color: #d7ecee;
-        min-height: 80vh;
-      }
-      .hero img {
-        flex: 1;
-        width: 50vw;
-        object-fit: cover;
-      }
-      .hero-text {
-        flex: 1;
-        min-width: 300px;
-        padding: 2rem 5vw;
-      }
-      .hero-text p {
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-        color: #444;
-      }
-      .hero-text h2 {
-        font-family: "Playfair Display", serif;
-        font-size: 3.5rem;
-        line-height: 1.2;
-        font-weight: 700;
-        color: #2b2b2b;
-        margin-bottom: 2rem;
-      }
-      .hero-text button {
-        background: #444;
-        color: white;
-        padding: 0.8rem 1.5rem;
-        border: none;
-        border-radius: 4px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .promos {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2rem;
-        padding: 4rem 5vw;
-        background: #fff;
-      }
-      .promo-card {
-        position: relative;
-        width: 400px;
-        height: 300px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-size: cover;
-        background-position: center;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      }
-      .promo-card .content {
-        background: white;
-        padding: 2rem;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      }
-      .promo-card .content h3 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.4rem;
-        color: #333;
-        margin-bottom: 1rem;
-      }
-      .promo-card .content p {
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
-      }
-      .promo-card .content a {
-        display: inline-block;
-        margin-top: 0.5rem;
-        color: #333;
-        font-weight: bold;
-        text-decoration: underline;
-      }
-
-      /* ART LAYOUT SECTION */
-      .art-layout {
-        margin: 80px 10vw;
-        max-width: 1400px;
-        padding: 0 60px;
-      }
-      .art-columns {
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-      }
-      .art-column {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-      }
-      .art-column.left {
-        margin-left: 60px;
-      }
-      .art-column.right {
-        margin-right: 60px;
-      }
-
-      .art-box.text-left {
-        text-align: left;
-      }
-      .art-box img {
-        width: 70%;
-        display: block;
-        margin: 0 auto 20px;
-      }
-      .art-box .title {
-        font-size: 14px;
-        text-decoration: underline;
-        font-weight: 500;
-      }
-      .art-box .subtitle {
-        font-size: 12px;
-        font-weight: normal;
-      }
-      .art-box {
-        padding: 20px;
-        text-align: center;
-        background: white;
-        border: 1px solid black;
-      }
-
-      .art-box.text-left {
-        text-align: left;
-      }
-
-      .art-box.colored {
-        background: none; /* fallback */
-        border: none !important;
-      }
-
-      .art-box.bg-blue {
-        background: #d7edf1;
-      }
-
-      .art-box.bg-green {
-        background: #e0e7d9;
-      }
-
-      .art-box.bg-peach {
-        background: #f3e1d4;
-      }
-
-      .art-layout a {
-        color: #222;
-        font-size: 14px;
-        padding: 1.6em;
-      }
-
-      footer {
-        text-align: center;
-        padding: 2rem;
-        font-size: 0.9rem;
-        color: #777;
-        background: #fafafa;
-        border-top: 1px solid #eee;
-      }
-
-      @media (max-width: 1024px) {
-  header {
-    padding: 1rem 5vw;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  nav {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-  }
-
-  .hero {
-    flex-direction: column-reverse;
-    text-align: center;
-  }
-
-  .hero img {
-    width: 100%;
-    max-height: 300px;
-  }
-
-  .hero-text {
-    padding: 2rem 2vw;
-  }
-
-  .art-columns {
-    flex-direction: column;
-    gap: 60px;
-  }
-
-  .art-column.left,
-  .art-column.right {
-    margin: 0;
-    padding: 0 10px;
-  }
-
-  .promo-card {
-    width: 90vw;
-    height: auto;
-    min-height: 250px;
-  }
-
-  .promo-card .content {
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .hero-text h2 {
-    font-size: 2.2rem;
-  }
-
-  nav {
-    flex-direction: column;
-    gap: 1rem;
-    font-size: 1rem;
-  }
-
-  .promo-card .content h3 {
-    font-size: 1.1rem;
-  }
-
-  .promo-card .content p {
-    font-size: 1rem;
-  }
-
-  .art-box img {
-    width: 90%;
-  }
-
-  .art-layout {
-    padding: 0 20px;
-    margin: 40px 0;
-  }
-
-  footer {
-    font-size: 0.8rem;
-    padding: 1.5rem;
-  }
-}
-
-    </style>
-  </head>
-  <body>
-    <header>
+  <header>
+    <div class="header-top">
       <div class="logo">
         <img src="logo.avif" alt="Rhythm's Palette Logo" />
       </div>
-      <nav>
-        <a href="#home" class="active">Home</a>
-        <a href="products.html">Products</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+    
+    <nav class="nav-links">
+      <a href="#" class="active">Home</a>
+      <a href="products.html">Products</a>
+      <a href="#about">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    </div>
+  </header>
 
-    <section class="hero" id="home">
-      <img src="sketch1.avif" alt="Framed Sketch" />
-      <div class="hero-text">
-        <p>Express Yourself &</p>
-        <h2>ELEVATE<br />YOUR<br />SPACE</h2>
-        <button>View Products</button>
-      </div>
-    </section>
+  <section class="hero" id="home">
+    <img src="sketch1.avif" alt="Framed Sketch" />
+    <div class="hero-text">
+      <p>Express Yourself &</p>
+      <h2>ELEVATE<br />YOUR<br />SPACE</h2>
+      <a href="products.html"><button>View Products</button></a>
+    </div>
+  </section>
 
-    <section class="promos">
-      <div class="promo-card" style="background-image: url('satin.avif')">
-        <div class="content">
-          <h3>Different Collections<br />For Your Tastes</h3>
-          <a href="#gallery">View Collections</a>
-        </div>
+  <section class="promos">
+    <div class="promo-card" style="background-image: url('satin.avif')">
+      <div class="content">
+        <h3>Different Collections<br />For Your Tastes</h3>
+        <a href="products.html">View Collections</a>
       </div>
-      <div
-        class="promo-card"
-        style="
-          background-image: url('https://images.unsplash.com/photo-1618221269336-02b7c6f45091?auto=format&fit=crop&w=870&q=80');
-        "
-      >
-        <div class="content">
-          <h3 style="font-family: 'Playfair Display', cursive; font-size: 1rem">
-            Don't Miss
-          </h3>
-          <p style="font-family: 'Playfair Display', serif; font-size: 1.3rem">
-            20% OFF YOUR<br />SECOND PURCHASE
+    </div>
+    <div class="promo-card" style="background-image: url('https://images.unsplash.com/photo-1618221269336-02b7c6f45091?auto=format&fit=crop&w=870&q=80')">
+      <div class="content">
+        <h3 style="font-family: 'Snell Roundhand W01 Script'; font-size: 25px; line-height: 1.6; margin-top: 10px;">Don't Miss</h3>
+        <p style="font-family: 'Playfair Display', serif; font-size: 1.3rem">20% OFF YOUR<br />SECOND PURCHASE</p>
+        <a href="products.html" style="display: inline-block; padding: 0.5rem 1.5rem; background: #444; color: #fff; text-decoration: none;">View All</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="art-layout">
+    <div class="art-columns">
+      <div class="art-column left">
+        <div class="art-box text-left" style="border: none">
+          <h2 class="responsive-heading">ORIGINAL<br />HAND-MADE<br />DESIGNS</h2>
+          <p style="font-family: 'Snell Roundhand W01 Script'; font-size: 25px; line-height: 1.6; margin-top: 10px;">Uploaded frequently</p>
+          <p style="font-size: 14px; line-height: 1.6; margin-top: 10px">
+            Rhythm's Palette is a Visual Art Store in Kamloops, British Columbia, Canada. We offer original hand-made minimalistic and intrinsic sketches at a reasonable rate. Rhythm's expressions come from a place with a blend of harmony and chaos. Find your muse, find your rhythm, at Rhythm's Palette.
           </p>
-          <a
-            href="#gallery"
-            style="
-              display: inline-block;
-              padding: 0.5rem 1.5rem;
-              background: #444;
-              color: #fff;
-              text-decoration: none;
-            "
-            >View All</a
-          >
+        </div>
+        <div class="art-box colored bg-blue">
+          <img src="grove-1.png" alt="Framed Sketch" />
+          <div class="title">BUBBLES COLLECTION</div>
+          <a href="products.html?collection=Bubbles#">Shop Now</a>
+        </div>
+        <div class="art-box">
+          <img src="pineapple.avif" alt="Framed Sketch" />
+          <div class="title">THE LONELIES<br /></div>
+          <a href="products.html?collection=Lonelies">Shop Now</a>
         </div>
       </div>
-    </section>
 
-    <section class="art-layout">
-      <div class="art-columns">
-        <div class="art-column left">
-          <div class="art-box text-left" style="border: none">
-            <h2 style="font-size: 60px; line-height: 1.4">
-              ORIGINAL<br />HAND-MADE<br />DESIGNS
-            </h2>
-            <p
-              style="font-family: 'Snell Roundhand W01 Script'; font-size: 25px; line-height: 1.6; margin-top: 10px;"
-            >
-              Uploaded frequently
-            </p>
-            <p style="font-size: 14px; line-height: 1.6; margin-top: 10px">
-              Rhythm's Palette is a Visual Art Store in Kamloops, British
-              Columbia, Canada. We offer original hand-made minimalistic and
-              intrinsic sketches at a reasonable rate. Rhythm's expressions come
-              from a place with a blend of harmony and chaos. Find your muse,
-              find your rhythm, at Rhythm's Palette.
-            </p>
-          </div>
-          <div class="art-box colored bg-blue">
-            <img src="bubbles.avif" alt="Framed Sketch" />
-            <div class="title">BUBBLES COLLECTION</div>
-            <a href="#">Shop Now</a>
-          </div>
-          <div class="art-box">
-            <img src="pineapple.avif" alt="Framed Sketch" />
-            <div class="title">THE LONELIES<br /></div>
-            <a href="#">Shop Now</a>
-          </div>
+      <div class="art-column right">
+        <div class="art-box slideshow-box">
+          <img class="slideshow-image" src="abstraction-hypnosis-1.png" alt="Abstraction Hypnosis" />
+          <img class="slideshow-image" src="adams-eve-2.jpg" alt="Adam's Eve" />
+          <img class="slideshow-image" src="eternal-tides-3.png" alt="Eternal Tides" />
+          <img class="slideshow-image" src="mini-garden-1.png" alt="Mini Garden" />
+          <img class="slideshow-image" src="creators-touch-1.png" alt="Creator's Touch" />
+          <img class="slideshow-image" src="grove-1.png" alt="Grove" />
+          <img class="slideshow-image" src="twofaced-1.png" alt="TwoFaced" />
+          <img class="slideshow-image" src="the-pineapple-1.png" alt="The Pineapple" />
+          <img class="slideshow-image" src="shell-mono-1.png" alt="Shell Mono" />
+          <img class="slideshow-image" src="ascending-canopy-1.png" alt="Ascending Canopy" />
+          <img class="slideshow-image" src="the-castle-in-a-coud-1.png" alt="The Castle In A Cloud" />
+          <img class="slideshow-image" src="cracks-in-celeste-1.png" alt="Cracks in Celeste" />
         </div>
 
-        <div class="art-column right">
-          <div class="art-box">
-            <img src="sketch1.avif" alt="Framed Sketch" />
-          </div>
-          <div class="art-box colored bg-green">
-            <img src="zen1.avif" alt="Framed Sketch" />
-            <div class="title">ZEN COLLECTION</div>
-            <a href="#">Shop Now</a>
-          </div>
-          <div class="art-box colored bg-peach">
-            <img src="turtle.avif" alt="Framed Sketch" />
-            <div class="title">ANIMAL COLLECTION</div>
-            <a href="#">Shop Now</a>
-          </div>
+        <div class="art-box colored bg-green">
+          <img src="zen1.avif" alt="Framed Sketch" />
+          <div class="title">ZEN COLLECTION</div>
+          <a href="products.html?collection=Zen">Shop Now</a>
+        </div>
+        <div class="art-box colored bg-peach">
+          <img src="turtle.avif" alt="Framed Sketch" />
+          <div class="title">ANIMALIA COLLECTION</div>
+          <a href="products.html?collection=Animalia">Shop Now</a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer>&copy; 2025 Rhythm Chauhan. Designed with vision and heart.</footer>
+  <footer>&copy; 2025 Rhythm Chauhan. Designed with vision and heart.</footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
-  </body>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleBtn = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+
+      toggleBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+      });
+
+      const images = document.querySelectorAll(".slideshow-box .slideshow-image");
+      let index = 0;
+      setInterval(() => {
+        images[index].style.display = "none";
+        index = (index + 1) % images.length;
+        images[index].style.display = "block";
+      }, 2000);
+    });
+  </script>
+</body>
 </html>
